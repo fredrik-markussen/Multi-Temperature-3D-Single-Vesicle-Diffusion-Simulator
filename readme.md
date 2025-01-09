@@ -74,17 +74,88 @@ You can modify parameters at the top of the script to change simulation conditio
  - After modifying parameters, re-run the script to generate updated simulation results and video.
 
 **Simulation Details**
-**Model Assumptions:**
+<h2>Verification of Brownian Motion Mathematics</h2>
 
- - The diffusion coefficient D scales linearly with temperature T.
- - Brownian motion is simulated with reflective Z boundaries.
- - The script computes the concentration of molecules above Z=20000 pm and compares it to a threshold corresponding to 5 molecules in that volume.
+<p>The mathematics used in the simulation is based on principles of Brownian motion, derived from the Einstein relation and diffusion theory. Below is a step-by-step verification of the calculations for Brownian displacement and diffusion:</p>
 
-**Limitations:**
- - The model uses simplified assumptions and does not capture complex synaptic processes.
- - It assumes linear scaling of diffusion with temperature, which is not held at extreme temperatures.
- - The simulation neglects factors such as receptor binding kinetics, vesicle release mechanisms, and intricate synaptic architecture.
- - As noted in the disclaimer, this work should not be cited in academic literature.
+<h3>1. Diffusion Constant Calculation</h3>
+
+<p>The diffusion constant \( D \) is adjusted for each temperature using the equation:</p>
+<pre><code>D = D_base * (T / T_ref)</code></pre>
+<p>
+- \( D_{\text{base}} = 0.46 \times 10^{-9} \, \text{m}^2/\text{s} \) (for 310 K).<br>
+- \( T \) is the simulation temperature (e.g., 310, 274, or 50 K).<br>
+- \( T_{\text{ref}} = 310 \, \text{K} \).
+</p>
+<p>This calculation assumes diffusion scales linearly with temperature, a reasonable approximation for small molecules in a liquid.</p>
+<p>The computed diffusion constant is converted to picometers squared per microsecond (\( \text{pm}^2/\mu\text{s} \)) using:</p>
+<pre><code>D_pm2_per_us = D_m2_per_s * 1e24 / 1e6</code></pre>
+<p>This conversion is consistent, since:</p>
+<ul>
+  <li>\( 1 \, \text{m}^2 = 10^{24} \, \text{pm}^2 \)</li>
+  <li>\( 1 \, \text{s} = 10^{6} \, \mu\text{s} \)</li>
+</ul>
+
+<h3>2. Displacement Standard Deviation</h3>
+
+<p>The standard deviation for Brownian displacement is calculated using:</p>
+<pre><code>σ = sqrt(2 * D * Δt)</code></pre>
+<p>Where:</p>
+<ul>
+  <li>\( D \) is the diffusion constant in \( \text{pm}^2/\mu\text{s} \).</li>
+  <li>\( Δt = 0.001 \, \mu\text{s} \) (1 ns per frame).</li>
+</ul>
+<p>This formula provides the standard deviation of the random displacement in each spatial dimension, consistent with Brownian motion theory.</p>
+
+<h3>3. Brownian Motion Implementation</h3>
+
+<p>For each frame, random displacements are sampled from a normal distribution:</p>
+<pre><code>displacements = np.random.normal(loc=0, scale=sigma, size=(num_particles, 3))
+positions += displacements</code></pre>
+<p>This uses:</p>
+<ul>
+  <li>Mean \( μ = 0 \) (no net drift).</li>
+  <li>Standard deviation \( σ \) for each spatial dimension.</li>
+</ul>
+<p>This approach is consistent with Brownian motion, where displacements in each dimension are independent and normally distributed.</p>
+
+<h3>4. Reflective Boundaries</h3>
+
+<p>The script enforces reflective boundaries on the z-axis:</p>
+<pre><code>below_floor = positions[:, 2] &lt; reflective_floor
+positions[below_floor, 2] = 2 * reflective_floor - positions[below_floor, 2]
+
+above_roof = positions[:, 2] &gt; reflective_roof
+positions[above_roof, 2] = 2 * reflective_roof - positions[above_roof, 2]</code></pre>
+<p>This ensures particles remain within the simulation boundaries by reflecting them off the floors and ceilings.</p>
+
+<h3>5. Concentration Calculation</h3>
+
+<p>Concentration above a threshold \( z \) is computed as:</p>
+<pre><code>particle_counts = np.sum(all_positions[:, :, 2] &gt; threshold_z, axis=1)
+concentration = particle_counts / volume</code></pre>
+<p>
+- Particle counts are obtained by summing particles with \( z > \text{threshold_z} \).<br>
+- The volume of the region is calculated as \( \text{Area}_{xy} \times \text{Height} \).<br>
+- Concentration \( C \) is the number of particles divided by this volume.
+</p>
+
+<h3>Key Observations</h3>
+<ul>
+  <li>The calculations for diffusion, displacement, and boundaries align with Brownian motion theory.</li>
+  <li>Unit conversions are correctly handled.</li>
+  <li>Reflective boundaries and concentration calculations are logically implemented.</li>
+</ul>
+
+<h3>Limitations</h3>
+<ul>
+  <li><strong>Linear scaling assumption:</strong> The model assumes \( D \propto T \), which may not hold at extreme temperatures or account for viscosity changes.</li>
+  <li><strong>Simplifications:</strong> The simulation omits complex factors like receptor binding, vesicle release dynamics, and detailed synaptic architecture.</li>
+  <li><strong>Boundary conditions:</strong> Reflective boundaries are a simplified representation of biological membranes.</li>
+</ul>
+
+<p>Overall, the mathematical framework is sound under the given assumptions, making this simulation a useful educational tool despite its simplifications.</p>
+
 
 ## Interpretation and Relevance to Biology
 
