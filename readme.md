@@ -1,7 +1,7 @@
 # Multi-Temperature 3D Diffusion Simulation
 
 **Disclaimer:**  
-This code and simulation model, generated using LLMs, are provided for educational and experimental purposes only. The model makes simplified assumptions and is flawed. It is not peer-reviewed by topic experts and should not be cited in academic or public communications. Users are free to modify, experiment, and build upon this code as needed.
+This code and simulation model, generated using generative LLMs, are provided for educational and experimental purposes only. The model makes simplified assumptions and is flawed. It is not peer-reviewed by topic experts and should not be cited in academic or public communications. Users are free to modify, experiment, and build upon this code as needed.
 
 ## Overview
 
