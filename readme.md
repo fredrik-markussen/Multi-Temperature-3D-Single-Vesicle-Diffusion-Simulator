@@ -81,6 +81,11 @@ As noted in the disclaimer, this work should not be cited in academic literature
 
 ## Interpretation and Relevance to Biology
 
+<video width="640" height="480" controls>
+  <source src="Multi_Temperature_Diffusion.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 The simulation provides a visual and quantitative demonstration of how temperature influences the diffusion of neurotransmitters, specifically glutamate, in the synaptic cleft. Diffusion is a fundamental process underlying synaptic transmission, but the rate-limiting steps in synaptic delay is not due to diffusion itself.
 
 **Key Biological Insights:**
