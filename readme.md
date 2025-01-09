@@ -39,7 +39,10 @@ The goal is to explore how temperature affects diffusion speed and to illustrate
    ```bash
    git clone https://github.com/yourusername/multi-temperature-diffusion.git
    cd multi-temperature-diffusion
+
+   
 2. **Install required Python packages:**
+```bash
 pip install numpy matplotlib
 
 3. **Ensure that FFmpeg is installed and available in your system's PATH.:**
@@ -48,36 +51,43 @@ pip install numpy matplotlib
 
 To run the simulation and generate the multi-temperature video:
 
-bash
+```bash
 Copy code
 python multi_temperature_diffusion.py
-The script will:
+```
 
-Perform separate simulations for 310 K, 274 K, and 50 K.
-Store simulation data for each temperature.
-Create a multi-panel animation with three 3D scatter plots and one shared concentration graph.
-Save the final video as Multi_Temperature_Diffusion.mp4.
-Adjusting Parameters
+```bash
+pip install numpy matplotlib
+```
+
+**The script will:**
+
+ - Perform separate simulations for 310 K, 274 K, and 50 K.
+ - Store simulation data for each temperature.
+ - Create a multi-panel animation with three 3D scatter plots and one shared concentration graph.
+ - Save the final video as Multi_Temperature_Diffusion.mp4.
+
+**Adjusting Parameters**
 You can modify parameters at the top of the script to change simulation conditions:
 
-num_particles: Number of glutamate molecules.
-fps, duration: Frame rate and simulation duration.
-temperatures: List of temperatures to simulate (default [310, 274, 50]).
-Other parameters like reflective_floor, reflective_roof, and spatial limits can also be adjusted.
-After modifying parameters, re-run the script to generate updated simulation results and video.
+ - num_particles: Number of glutamate molecules.
+ - fps, duration: Frame rate and simulation duration.
+ - temperatures: List of temperatures to simulate (default [310, 274, 50]).
+ - Other parameters like reflective_floor, reflective_roof, and spatial limits can also be adjusted.
+ - After modifying parameters, re-run the script to generate updated simulation results and video.
 
-Simulation Details
-Model Assumptions:
+**Simulation Details**
+**Model Assumptions:**
 
-The diffusion coefficient D scales linearly with temperature T.
-Brownian motion is simulated with reflective Z boundaries.
-The script computes the concentration of molecules above Z=20000 pm and compares it to a threshold corresponding to 5 molecules in that volume.
+ - The diffusion coefficient D scales linearly with temperature T.
+ - Brownian motion is simulated with reflective Z boundaries.
+ - The script computes the concentration of molecules above Z=20000 pm and compares it to a threshold corresponding to 5 molecules in that volume.
 
-Limitations:
-The model uses simplified assumptions and do not capture complex synaptic processes.
-It assumes linear scaling of diffusion with temperature, which is not hold at extreme temperatures.
-The simulation neglects factors such as receptor binding kinetics, vesicle release mechanisms, and intricate synaptic architecture.
-As noted in the disclaimer, this work should not be cited in academic literature.
+**Limitations:**
+ - The model uses simplified assumptions and do not capture complex synaptic processes.
+ - It assumes linear scaling of diffusion with temperature, which is not held at extreme temperatures.
+ - The simulation neglects factors such as receptor binding kinetics, vesicle release mechanisms, and intricate synaptic architecture.
+ - As noted in the disclaimer, this work should not be cited in academic literature.
 
 ## Interpretation and Relevance to Biology
 
@@ -88,7 +98,7 @@ The simulation provides a visual and quantitative demonstration of how temperatu
 **Key Biological Insights:**
 
 - **Rapid Diffusion at Nanoscale:**  
-  The simulation underscores findings by Zheng et al. [^3] that diffusion at the nanoscale within the synaptic cleft is extremely fast. Even at lower temperatures like 50 K, the model predicts that molecules can traverse the synaptic cleft in nanoseconds, which is orders of magnitude shorter than synaptic delays observed in biological systems.
+  The simulation underscores findings by Zheng et al. [^3] that diffusion at the nanoscale within the synaptic cleft is extremely fast. Even at extreme and biologically irrelevant temperatures like 50 K, the model predicts that molecules can traverse the synaptic cleft in around 250 nanoseconds, which is orders of magnitude shorter than temperature-dependent synaptic delays observed in biological systems.
 
 - **Temperature Dependence of Synaptic Delay:**  
   Katz and Miledi [^1] demonstrated that synaptic delay at the neuromuscular junction is highly temperature-dependent, but the delay cannot be attributed solely to diffusion because diffusion occurs too rapidly. The simulation aligns with this by showing that even significant changes in temperature primarily affect diffusion speed, while the overall synaptic delay is likely governed by other processes such as vesicle fusion, calcium dynamics, and receptor kinetics.
@@ -98,7 +108,7 @@ The simulation provides a visual and quantitative demonstration of how temperatu
 
 **Relevance to Research and Education:**
 
-- The simulation serves as an educational tool to visualize how diffusion behaves under different temperatures, emphasizing that diffusion is not the bottleneck in synaptic signaling.
+- The simulation serves as an educational tool to visualize how diffusion behaves under different temperatures, emphasizing that diffusion is not the bottleneck in synaptic signalling.
 - It reinforces the concept that synaptic delay is influenced more by complex biochemical and cellular mechanisms than by the mere diffusion of neurotransmitters.
 - Researchers can use or adapt this simulation framework to explore other variables affecting synaptic transmission, although they should be cautious due to the model's simplifications and limitations.
 
