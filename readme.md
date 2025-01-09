@@ -37,15 +37,11 @@ The goal is to explore how temperature affects diffusion speed and to illustrate
 ## Installation
 
 1. **Clone the repository:**
-   ```
-   git clone https://github.com/yourusername/multi-temperature-diffusion.git
-   cd multi-temperature-diffusion
+
 
    
 2. **Install required Python packages:**
-```
-pip install numpy matplotlib
-```
+
 
 Ensure that FFmpeg is installed on your system and is accessible from the command line, as Matplotlib uses it to render videos.
 
