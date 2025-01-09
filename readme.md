@@ -5,7 +5,7 @@ This code and simulation model, generated using LLMs, are provided for education
 
 ## Overview
 
-This repository contains a Python script that simulates the Brownian motion of glutamate molecules in a synaptic cleft under different temperatures (310 K, 274 K, and 50 K). The simulation visualizes the diffusion process using three separate 3D scatter plots—one for each temperature—and a shared 2D concentration graph overlaying the concentration curves for these temperatures.
+This repository provides a Python script to simulate the Brownian motion of glutamate molecules in a synaptic cleft across three different temperatures: 310 K, 274 K, and 50 K. The simulation models the diffusion process starting from a single point, representing the instantaneous release of a glutamate vesicle at the presynaptic membrane, to a hypothetical binding region on the opposite side of the cleft. The results are visualized using three separate 3D scatter plots—one for each temperature—and a shared 2D concentration graph that overlays the concentration curves, highlighting the temperature-dependent differences in diffusion.
 
 The goal is to explore how temperature affects diffusion speed and to illustrate that, within the physiological range, diffusion is extremely fast relative to synaptic delays. This work draws inspiration from:
 
@@ -14,8 +14,9 @@ The goal is to explore how temperature affects diffusion speed and to illustrate
 - *The effect of temperature on the synaptic delay at the neuromuscular junction* by B. Katz & R. Miledi, highlighting that diffusion is not the rate-limiting step in synaptic transmission.
 
 **Basic Results and Interpretation:**
-- At 310 K, diffusion occurs rapidly, filling the binding region within nanoseconds.
-- Lower temperatures (274 K and 50 K) show slower diffusion. However, even at 50 K, the diffusion process remains faster than typical synaptic delays.
+- At 310 K, diffusion occurs rapidly, filling a theoretical ligand binding region within nanoseconds (<50 ns).
+- At 274 K, diffusion is insignificantly slower, filling a theoretical ligand binding region within nanoseconds (<50 ns)
+- Lower temperatures (50 K) show slower diffusion. However, even at 50 K, the diffusion process remains faster than typical temperature-dependent synaptic delays observed by pervious studies.
 - These findings support literature suggesting that synaptic delay is governed more by processes other than mere molecular diffusion within the synaptic cleft.
 
 ## Features
