@@ -80,20 +80,20 @@ You can modify parameters at the top of the script to change simulation conditio
 
 <h3>1. Diffusion Constant Calculation</h3>
 
-<p>The diffusion constant \( D \) is adjusted for each temperature using the equation:</p>
+<p>The diffusion constant D is adjusted for each temperature using the equation:</p>
 <pre><code>D = D_base * (T / T_ref)</code></pre>
 <p>
-- \( D_{\text{base}} = 0.46 \times 10^{-9} \, \text{m}^2/\text{s} \) (for 310 K).<br>
-- \( T \) is the simulation temperature (e.g., 310, 274, or 50 K).<br>
-- \( T_{\text{ref}} = 310 \, \text{K} \).
+- D_base = 0.46 x 10^-9 m²/s (for 310 K).<br>
+- T is the simulation temperature (e.g., 310, 274, or 50 K).<br>
+- T_ref = 310 K.
 </p>
 <p>This calculation assumes diffusion scales linearly with temperature, a reasonable approximation for small molecules in a liquid.</p>
-<p>The computed diffusion constant is converted to picometers squared per microsecond (\( \text{pm}^2/\mu\text{s} \)) using:</p>
+<p>The computed diffusion constant is converted to picometers squared per microsecond (pm²/µs) using:</p>
 <pre><code>D_pm2_per_us = D_m2_per_s * 1e24 / 1e6</code></pre>
 <p>This conversion is consistent, since:</p>
 <ul>
-  <li>\( 1 \, \text{m}^2 = 10^{24} \, \text{pm}^2 \)</li>
-  <li>\( 1 \, \text{s} = 10^{6} \, \mu\text{s} \)</li>
+  <li>1 m² = 10^24 pm²</li>
+  <li>1 s = 10^6 µs</li>
 </ul>
 
 <h3>2. Displacement Standard Deviation</h3>
@@ -102,8 +102,8 @@ You can modify parameters at the top of the script to change simulation conditio
 <pre><code>σ = sqrt(2 * D * Δt)</code></pre>
 <p>Where:</p>
 <ul>
-  <li>\( D \) is the diffusion constant in \( \text{pm}^2/\mu\text{s} \).</li>
-  <li>\( Δt = 0.001 \, \mu\text{s} \) (1 ns per frame).</li>
+  <li>D is the diffusion constant in pm²/µs.</li>
+  <li>Δt = 0.001 µs (1 ns per frame).</li>
 </ul>
 <p>This formula provides the standard deviation of the random displacement in each spatial dimension, consistent with Brownian motion theory.</p>
 
@@ -114,8 +114,8 @@ You can modify parameters at the top of the script to change simulation conditio
 positions += displacements</code></pre>
 <p>This uses:</p>
 <ul>
-  <li>Mean \( μ = 0 \) (no net drift).</li>
-  <li>Standard deviation \( σ \) for each spatial dimension.</li>
+  <li>Mean μ = 0 (no net drift).</li>
+  <li>Standard deviation σ for each spatial dimension.</li>
 </ul>
 <p>This approach is consistent with Brownian motion, where displacements in each dimension are independent and normally distributed.</p>
 
@@ -127,17 +127,17 @@ positions[below_floor, 2] = 2 * reflective_floor - positions[below_floor, 2]
 
 above_roof = positions[:, 2] &gt; reflective_roof
 positions[above_roof, 2] = 2 * reflective_roof - positions[above_roof, 2]</code></pre>
-<p>This ensures particles remain within the simulation boundaries by reflecting them off the floors and ceilings.</p>
+<p>This ensures particles remain within the simulation boundaries by reflecting them off the floor and ceiling.</p>
 
 <h3>5. Concentration Calculation</h3>
 
-<p>Concentration above a threshold \( z \) is computed as:</p>
+<p>Concentration above a threshold z is computed as:</p>
 <pre><code>particle_counts = np.sum(all_positions[:, :, 2] &gt; threshold_z, axis=1)
 concentration = particle_counts / volume</code></pre>
 <p>
-- Particle counts are obtained by summing particles with \( z > \text{threshold_z} \).<br>
-- The volume of the region is calculated as \( \text{Area}_{xy} \times \text{Height} \).<br>
-- Concentration \( C \) is the number of particles divided by this volume.
+- Particle counts are obtained by summing particles with z &gt; threshold_z.<br>
+- The volume of the region is calculated as Area_xy × Height.<br>
+- Concentration C is the number of particles divided by this volume.
 </p>
 
 <h3>Key Observations</h3>
@@ -149,7 +149,7 @@ concentration = particle_counts / volume</code></pre>
 
 <h3>Limitations</h3>
 <ul>
-  <li><strong>Linear scaling assumption:</strong> The model assumes \( D \propto T \), which may not hold at extreme temperatures or account for viscosity changes.</li>
+  <li><strong>Linear scaling assumption:</strong> The model assumes D ∝ T, which may not hold at extreme temperatures or account for viscosity changes.</li>
   <li><strong>Simplifications:</strong> The simulation omits complex factors like receptor binding, vesicle release dynamics, and detailed synaptic architecture.</li>
   <li><strong>Boundary conditions:</strong> Reflective boundaries are a simplified representation of biological membranes.</li>
 </ul>
