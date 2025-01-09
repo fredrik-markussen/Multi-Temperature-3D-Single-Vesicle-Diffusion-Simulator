@@ -53,12 +53,7 @@ Ensure that FFmpeg is installed on your system and is accessible from the comman
 To run the simulation and generate the multi-temperature video:
 
 ```bash
-Copy code
 python multi_temperature_diffusion.py
-```
-
-```bash
-pip install numpy matplotlib
 ```
 
 **The script will:**
@@ -85,7 +80,7 @@ You can modify parameters at the top of the script to change simulation conditio
  - The script computes the concentration of molecules above Z=20000 pm and compares it to a threshold corresponding to 5 molecules in that volume.
 
 **Limitations:**
- - The model uses simplified assumptions and do not capture complex synaptic processes.
+ - The model uses simplified assumptions and does not capture complex synaptic processes.
  - It assumes linear scaling of diffusion with temperature, which is not held at extreme temperatures.
  - The simulation neglects factors such as receptor binding kinetics, vesicle release mechanisms, and intricate synaptic architecture.
  - As noted in the disclaimer, this work should not be cited in academic literature.
